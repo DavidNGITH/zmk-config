@@ -1,102 +1,100 @@
 /*
-
-* Copyright (c) 2020 The ZMK Contributors
-*
-* SPDX-License-Identifier: MIT
-  */
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/rgb.h>
 
 / {
-keymap {
-compatible = "zmk,keymap";
+    keymap {
+            compatible = "zmk,keymap";
 
-```
-    default_layer {
-        // -----------------------------------------------------------------------------------------
-        // | ESC |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |  Å   |
-        // | TAB | A/⇧ | S/A | D/R | F/L |  G  |   |  H  | J/L | K/R | L/A | Ö/⇧ |  Ä   |
-        // |  <  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  -  |  "   |
-        //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| CTRL/R|
-        // -----------------------------------------------------------------------------------------
-        bindings = <
-            &kp ESC       &kp Q          &kp W          &kp E          &kp R          &kp T
-            &kp Y         &kp U          &kp I          &kp O          &kp P          &kp ARNG
+            default_layer {
+            // -----------------------------------------------------------------------------------------
+            // | ESC |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |  Å   |
+            // | TAB | A/⇧ | S/A | D/R | F/L |  G  |   |  H  | J/L | K/R | L/A | Ö/⇧ |  Ä   |
+            // |  <  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  -  |  "   |
+            //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| CTRL/R|
+            // -----------------------------------------------------------------------------------------
+            bindings = <
+                &kp ESC       &kp Q          &kp W          &kp E          &kp R          &kp T
+                &kp Y         &kp U          &kp I          &kp O          &kp P          &kp ARNG
 
-            &kp TAB       &mt LSHFT A    &mt LALT S     &lt 2 D        &lt 1 F        &kp G
-            &kp H         &lt 1 J        &lt 2 K        &mt RALT L     &mt LSHFT ODIA  &kp ADIA
+                &kp TAB       &mt LSHFT A    &mt LALT S     &lt 2 D        &lt 1 F        &kp G
+                &kp H         &lt 1 J        &lt 2 K        &mt RALT L     &mt LSHFT ODIA  &kp ADIA
 
-            &kp GRAVE     &kp Z          &kp X          &kp C          &kp V          &kp B
-            &kp N         &kp M          &kp COMMA     &kp DOT        &kp MINUS      &kp SQT
+                &kp GRAVE     &kp Z          &kp X          &kp C          &kp V          &kp B
+                &kp N         &kp M          &kp COMMA     &kp DOT        &kp MINUS      &kp SQT
 
-            &mt LGUI DEL  &kp LCTRL      &kp SPACE
-            &kp BSPC      &lt 1 RET      &lt 2 RCTRL
-        >;
-    };
+                &mt LGUI DEL  &kp LCTRL      &kp SPACE
+                &kp BSPC      &lt 1 RET      &lt 2 RCTRL
+            >;
+        };
 
-    lower_layer {
-        // -----------------------------------------------------------------------------------------
-        // |     |     |     |     |     |     |   |  7  |  8  |  9  |  +  |  /  |  =   |
-        // | TAB |  ⇧  | ALT | RSE | LWR |     |   |  4  |  5  |  6  |  -  | PGU |     |
-        // | ADJ |     |     |     |     |     |   |  1  |  2  |  3  |  *  | PGD |     |
-        //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| 0|
-        // -----------------------------------------------------------------------------------------
-        bindings = <
-            &trans        &trans        &trans        &trans        &trans        &trans
-            &kp N7        &kp N8        &kp N9        &kp PLUS       &kp FSLH       &kp EQUAL
+        lower_layer {
+            // -----------------------------------------------------------------------------------------
+            // |     |     |     |     |     |     |   |  7  |  8  |  9  |  +  |  /  |  =   |
+            // | TAB |  ⇧  | ALT | RSE | LWR |     |   |  4  |  5  |  6  |  -  | PGU |     |
+            // | ADJ |     |     |     |     |     |   |  1  |  2  |  3  |  *  | PGD |     |
+            //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| 0|
+            // -----------------------------------------------------------------------------------------
+            bindings = <
+                &trans        &trans        &trans        &trans        &trans        &trans
+                &kp N7        &kp N8        &kp N9        &kp PLUS       &kp FSLH       &kp EQUAL
 
-            &kp TAB       &kp LSHFT      &kp LALT       &mo 2          &mo 1          &trans
-            &kp N4        &kp N5        &kp N6        &kp MINUS      &kp PG_UP      &trans
+                &kp TAB       &kp LSHFT      &kp LALT       &mo 2          &mo 1          &trans
+                &kp N4        &kp N5        &kp N6        &kp MINUS      &kp PG_UP      &trans
 
-            &tog 3        &trans        &trans        &trans        &trans        &trans
-            &kp N1        &kp N2        &kp N3        &kp ASTRK       &kp PG_DN      &trans
+                &tog 3        &trans        &trans        &trans        &trans        &trans
+                &kp N1        &kp N2        &kp N3        &kp ASTRK       &kp PG_DN      &trans
 
-            &mt LGUI DEL  &kp LCTRL      &kp SPACE
-            &kp BSPC      &lt 1 RET      &kp N0
-        >;
-    };
+                &mt LGUI DEL  &kp LCTRL      &kp SPACE
+                &kp BSPC      &lt 1 RET      &kp N0
+            >;
+        };
 
-    raise_layer {
-        // -----------------------------------------------------------------------------------------
-        // | PREV| NEXT| PLAY| MUTE| VOL- | VOL+|   |     |     |     |     |     |     |
-        // |     | UNDO| CUT |     | COPY |PASTE|   |     |     |  ↑  |     |     |     |
-        // |     |     |     | F2  | F12  |     |   |     |  ←  |  ↓  |  →  |     |     |
-        //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| CTRL/R|
-        // -----------------------------------------------------------------------------------------
-        bindings = <
-            &kp MPRV       &kp MNXT       &kp MPLY       &kp MUTE       &kp VOLD       &kp VOLU
-            &trans        &kp LC(Z)       &kp LC(X)       &trans        &kp LC(C)       &kp LC(V)
-            &trans        &trans        &trans        &kp F2         &kp F12        &trans
+        raise_layer {
+            // -----------------------------------------------------------------------------------------
+            // | PREV| NEXT| PLAY| MUTE| VOL- | VOL+|   |     |     |     |     |     |     |
+            // |     | UNDO| CUT |     | COPY |PASTE|   |     |     |  ↑  |     |     |     |
+            // |     |     |     | F2  | F12  |     |   |     |  ←  |  ↓  |  →  |     |     |
+            //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| CTRL/R|
+            // -----------------------------------------------------------------------------------------
+            bindings = <
+                &kp MPRV       &kp MNXT       &kp MPLY       &kp MUTE       &kp VOLD       &kp VOLU
+                &trans        &kp LC(Z)       &kp LC(X)       &trans        &kp LC(C)       &kp LC(V)
+                &trans        &trans        &trans        &kp F2         &kp F12        &trans
 
-            &trans        &trans        &trans        &trans        &trans        &trans
-            &trans        &trans        &kp UP        &trans        &trans        &trans
-            &trans        &kp LEFT       &kp DOWN      &kp RIGHT      &trans        &trans
+                &trans        &trans        &trans        &trans        &trans        &trans
+                &trans        &trans        &kp UP        &trans        &trans        &trans
+                &trans        &kp LEFT       &kp DOWN      &kp RIGHT      &trans        &trans
 
-            &mt LGUI DEL  &kp LCTRL      &kp SPACE
-            &kp BSPC      &lt 1 RET      &lt 2 RCTRL
-        >;
-    };
+                &mt LGUI DEL  &kp LCTRL      &kp SPACE
+                &kp BSPC      &lt 1 RET      &lt 2 RCTRL
+            >;
+        };
 
-    adjust_layer {
-        // -----------------------------------------------------------------------------------------
-        // |     |     |     |     |     |     |   |     |     |     |     |     |     |
-        // |     |     |     |     |     |     |   |     |     |     |     |     |     |
-        // |     |     |     |     |     |     |   |     |     |     |     |     |     |
-        //                    |     |     |     |   |     |     |     |
-        // -----------------------------------------------------------------------------------------
-        bindings = <
-            &trans        &trans        &trans        &trans        &trans        &trans
-            &trans        &trans        &trans        &trans        &trans        &trans
-            &trans        &trans        &trans        &trans        &trans        &trans
+        adjust_layer {
+            // -----------------------------------------------------------------------------------------
+            // |     |     |     |     |     |     |   |     |     |     |     |     |     |
+            // |     |     |     |     |     |     |   |     |     |     |     |     |     |
+            // |     |     |     |     |     |     |   |     |     |     |     |     |     |
+            //                    |     |     |     |   |     |     |     |
+            // -----------------------------------------------------------------------------------------
+            bindings = <
+                &trans        &trans        &trans        &trans        &trans        &trans
+                &trans        &trans        &trans        &trans        &trans        &trans
+                &trans        &trans        &trans        &trans        &trans        &trans
 
-            &trans        &trans        &trans        &tog 3         &trans        &trans
-            &trans        &trans        &trans        &trans        &trans        &trans
+                &trans        &trans        &trans        &tog 3         &trans        &trans
+                &trans        &trans        &trans        &trans        &trans        &trans
 
-            &trans        &trans        &trans
-            &trans        &trans        &trans
-        >;
+                &trans        &trans        &trans
+                &trans        &trans        &trans
+            >;
+        };
     };
 };
