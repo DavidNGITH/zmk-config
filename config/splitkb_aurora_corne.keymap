@@ -1,92 +1,27 @@
 /*
 
-* ============================================================================
-* SPLITKB AURORA CORNE
-* ============================================================================
+* Copyright (c) 2020 The ZMK Contributors
 *
-* LAYERS
-*
-* 0  QWERTY    Normal typing
-* 1  LOWER     Numbers / numpad / navigation
-* 2  RAISE     Media / editing / arrows
-* 3  ADJUST    RGB controls
-*
-* ============================================================================
-*
-* THUMB CLUSTER
-*
-* QWERTY / LOWER / RAISE:
-*
-* LEFT:
-* GUI/DEL     CTRL       SPACE
-*
-* RIGHT:
-* BACKSPACE   ENTER/LWR  CTRL/RSE
-*
-* ============================================================================
-  */
-
-/*
-
-* ============================================================================
-* ZMK INCLUDES
-* ============================================================================
+* SPDX-License-Identifier: MIT
   */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-
-/*
-
-* ============================================================================
-* KEYMAP
-* ============================================================================
-  */
+#include <dt-bindings/zmk/rgb.h>
 
 / {
 keymap {
 compatible = "zmk,keymap";
 
 ```
-    /*
-     * ====================================================================
-     * LAYER 0 - QWERTY
-     * ====================================================================
-     *
-     *   ┌─────┬─────┬─────┬─────┬─────┬─────┐     ┌─────┬─────┬─────┬─────┬─────┬─────┐
-     *   │ ESC │  Q  │  W  │  E  │  R  │  T  │     │  Y  │  U  │  I  │  O  │  P  │  Å  │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │ TAB │ A/⇧ │ S/A │ D/R │ F/L │  G  │     │  H  │ J/L │ K/R │ L/A │ Ö/⇧ │  Ä  │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤     ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │  <  │  Z  │  X  │  C  │  V  │  B  │     │  N  │  M  │  ,  │  .  │  -  │  "  │
-     *   └─────┴─────┴─────┴─────┴─────┴─────┘     └─────┴─────┴─────┴─────┴─────┴─────┘
-     *
-     *   ┌─────────┬─────────┬─────────┐     ┌──────────┬────────────┬────────────┐
-     *   │ GUI/DEL │   CTRL  │  SPACE  │     │ BACKSPACE│ ENTER/LWR  │  CTRL/RSE  │
-     *   └─────────┴─────────┴─────────┘     └──────────┴────────────┴────────────┘
-     *
-     * A/S/D/F and J/K/L/Ö use home-row modifiers/layer-taps.
-     *
-     * A = Shift on hold
-     * S = Alt on hold
-     * D = Raise on hold
-     * F = Lower on hold
-     *
-     * J = Lower on hold
-     * K = Raise on hold
-     * L = Alt on hold
-     * Ö = Shift on hold
-     *
-     * Right thumb:
-     *   BACKSPACE
-     *   ENTER on tap / LOWER on hold
-     *   CTRL on tap / RAISE on hold
-     *
-     * ====================================================================
-     */
-
     default_layer {
+        // -----------------------------------------------------------------------------------------
+        // | ESC |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |  Å   |
+        // | TAB | A/⇧ | S/A | D/R | F/L |  G  |   |  H  | J/L | K/R | L/A | Ö/⇧ |  Ä   |
+        // |  <  |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  -  |  "   |
+        //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| CTRL/R|
+        // -----------------------------------------------------------------------------------------
         bindings = <
             &kp ESC       &kp Q          &kp W          &kp E          &kp R          &kp T
             &kp Y         &kp U          &kp I          &kp O          &kp P          &kp ARNG
@@ -102,217 +37,66 @@ compatible = "zmk,keymap";
         >;
     };
 
-
-    /*
-     * ====================================================================
-     * LAYER 1 - LOWER
-     * ====================================================================
-     *
-     * LOWER gives access to the numpad and navigation.
-     *
-     * LEFT SIDE:
-     *
-     *   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-     *   │     │     │     │     │     │     │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │ TAB │ ⇧   │ ALT │ RSE │ LWR │     │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │ ADJ │     │     │     │     │     │
-     *   └─────┴─────┴─────┴─────┴─────┴─────┘
-     *
-     * The A/S/D/F positions reproduce the SPECIAL functions
-     * from the QWERTY layer:
-     *
-     *   A = SHIFT
-     *   S = ALT
-     *   D = RAISE
-     *   F = LOWER
-     *
-     *
-     * RIGHT SIDE - NUMPAD
-     *
-     *   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-     *   │  7  │  8  │  9  │  +  │  /  │     │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │  4  │  5  │  6  │  -  │ PGUP│     │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │  1  │  2  │  3  │  *  │ PGDN│     │
-     *   └─────┴─────┴─────┴─────┴─────┴─────┘
-     *
-     *   Rightmost thumb = 0
-     *
-     * IMPORTANT:
-     *
-     * The numbers are NORMAL number keys, NOT keypad keycodes.
-     *
-     * Therefore:
-     *
-     *   1 + SHIFT = !
-     *   2 + SHIFT = @
-     *   3 + SHIFT = #
-     *   4 + SHIFT = $
-     *   5 + SHIFT = %
-     *   6 + SHIFT = ^
-     *   7 + SHIFT = &
-     *   8 + SHIFT = *
-     *   9 + SHIFT = (
-     *   0 + SHIFT = )
-     *
-     * This means holding the left SHIFT key while LOWER is active
-     * still gives the normal number-row symbols.
-     *
-     *
-     * ADJUST:
-     *
-     *   The ADJUST layer is accessed by holding LOWER and pressing
-     *   the ADJUST key on the lower-left side.
-     *
-     *   This makes accidental activation during normal typing unlikely.
-     *
-     * ====================================================================
-     */
-
     lower_layer {
+        // -----------------------------------------------------------------------------------------
+        // |     |     |     |     |     |     |   |  7  |  8  |  9  |  +  |  /  |  =   |
+        // | TAB |  ⇧  | ALT | RSE | LWR |     |   |  4  |  5  |  6  |  -  | PGU |     |
+        // | ADJ |     |     |     |     |     |   |  1  |  2  |  3  |  *  | PGD |     |
+        //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| 0|
+        // -----------------------------------------------------------------------------------------
         bindings = <
-            // Top row - intentionally empty
             &trans        &trans        &trans        &trans        &trans        &trans
+            &kp N7        &kp N8        &kp N9        &kp PLUS       &kp FSLH       &kp EQUAL
 
-            // Mirror the special home-row functions from QWERTY
-            &kp TAB       &kp LSHFT      &kp LALT       &mo 2         &mo 1         &trans
-
-            // ADJUST toggle
-            &tog 3        &trans         &trans        &trans        &trans        &trans
-
-
-            // Numpad / operators
-            &kp N7        &kp N8        &kp N9        &kp PLUS       &kp FSLH       &trans
+            &kp TAB       &kp LSHFT      &kp LALT       &mo 2          &mo 1          &trans
             &kp N4        &kp N5        &kp N6        &kp MINUS      &kp PG_UP      &trans
-            &kp N1        &kp N2        &kp N3        &kp ASTRK      &kp PG_DN      &trans
 
+            &tog 3        &trans        &trans        &trans        &trans        &trans
+            &kp N1        &kp N2        &kp N3        &kp ASTRK       &kp PG_DN      &trans
 
-            // Same thumb cluster as QWERTY
             &mt LGUI DEL  &kp LCTRL      &kp SPACE
-            &kp BSPC      &lt 1 RET      &lt 2 RCTRL
+            &kp BSPC      &lt 1 RET      &kp N0
         >;
     };
-
-
-    /*
-     * ====================================================================
-     * LAYER 2 - RAISE
-     * ====================================================================
-     *
-     * LEFT SIDE - MEDIA / EDITING
-     *
-     *   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-     *   │ PREV│ NEXT│ PLAY│ MUTE│ VOL-│ VOL+│
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │     │ UNDO│ CUT │     │ COPY│PASTE│
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │     │     │     │ F2  │ F12 │     │
-     *   └─────┴─────┴─────┴─────┴─────┴─────┘
-     *
-     *
-     * RIGHT SIDE - NORMAL ARROW CLUSTER
-     *
-     *                 UP
-     *
-     *             LEFT DOWN RIGHT
-     *
-     *   ┌─────┬─────┬─────┬─────┬─────┬─────┐
-     *   │     │     │  ↑  │     │     │     │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │     │     │     │     │     │     │
-     *   ├─────┼─────┼─────┼─────┼─────┼─────┤
-     *   │     │  ←  │  ↓  │  →  │     │     │
-     *   └─────┴─────┴─────┴─────┴─────┴─────┘
-     *
-     * The arrows use ONLY the normal 6-key right-hand section.
-     * Thumb keys are NOT used for arrows.
-     *
-     *
-     * THUMBS:
-     *
-     * Exactly the same as QWERTY.
-     *
-     * ====================================================================
-     */
 
     raise_layer {
+        // -----------------------------------------------------------------------------------------
+        // | PREV| NEXT| PLAY| MUTE| VOL- | VOL+|   |     |     |     |     |     |     |
+        // |     | UNDO| CUT |     | COPY |PASTE|   |     |     |  ↑  |     |     |     |
+        // |     |     |     | F2  | F12  |     |   |     |  ←  |  ↓  |  →  |     |     |
+        //                    | GUI | CTRL| SPC |   | BSPC| ENT/L| CTRL/R|
+        // -----------------------------------------------------------------------------------------
         bindings = <
-            // Media
             &kp MPRV       &kp MNXT       &kp MPLY       &kp MUTE       &kp VOLD       &kp VOLU
-
-            // Editing
-            &trans        &kp C(Z)       &kp C(X)       &trans        &kp C(C)       &kp C(V)
-
-            // Extra functions
+            &trans        &kp LC(Z)       &kp LC(X)       &trans        &kp LC(C)       &kp LC(V)
             &trans        &trans        &trans        &kp F2         &kp F12        &trans
 
-
-            // Right side - arrow cluster
             &trans        &trans        &trans        &trans        &trans        &trans
             &trans        &trans        &kp UP        &trans        &trans        &trans
-            &trans        &kp LEFT      &kp DOWN      &kp RIGHT      &trans        &trans
+            &trans        &kp LEFT       &kp DOWN      &kp RIGHT      &trans        &trans
 
-
-            // Same thumb cluster as QWERTY
             &mt LGUI DEL  &kp LCTRL      &kp SPACE
             &kp BSPC      &lt 1 RET      &lt 2 RCTRL
         >;
     };
 
-
-    /*
-     * ====================================================================
-     * LAYER 3 - ADJUST
-     * ====================================================================
-     *
-     * RGB / UNDERGLOW CONTROLS
-     *
-     *   SAT+     SAT-
-     *
-     *   HUE+     HUE-
-     *   VAL+     VAL-
-     *
-     *   RGB ON/OFF
-     *   NEXT RGB MODE
-     *   BRIGHTNESS DOWN
-     *   BRIGHTNESS UP
-     *
-     *
-     * ACCESS:
-     *
-     *   Hold LOWER
-     *       +
-     *   Press ADJUST
-     *
-     * ADJUST is toggled, so pressing the ADJUST key again turns
-     * it back off.
-     *
-     * ====================================================================
-     */
-
     adjust_layer {
+        // -----------------------------------------------------------------------------------------
+        // |     |     |     |     |     |     |   |     |     |     |     |     |     |
+        // | SAT+| SAT-|     |     |     |     |   |     |     |     |     |     |     |
+        // | HUE+| HUE-| BRI+| BRI-|     |     |   |     |     |     |     |     |     |
+        //                    | RGB | MODE|     |   |     |     |     |
+        // -----------------------------------------------------------------------------------------
         bindings = <
-            // Top row
+            &trans        &trans        &trans        &trans        &trans        &trans
+            &rgb_ug RGB_SAI &rgb_ug RGB_SAD &trans        &trans        &trans        &trans
+            &rgb_ug RGB_HUI &rgb_ug RGB_HUD &rgb_ug RGB_BRI &rgb_ug RGB_BRD &trans        &trans
+
+            &rgb_ug RGB_TOG &rgb_ug RGB_EFF &trans        &tog 3         &trans        &trans
             &trans        &trans        &trans        &trans        &trans        &trans
 
-            // Saturation
-            &rgb_ug RGB_SAI &rgb_ug RGB_SAD &trans &trans &trans &trans
-
-            // Hue / Value
-            &rgb_ug RGB_HUI &rgb_ug RGB_HUD &rgb_ug RGB_BRI &rgb_ug RGB_BRD &trans &trans
-
-            // RGB toggle / mode / brightness
-            &rgb_ug RGB_ON  &rgb_ug RGB_EFF &trans &tog 3 &rgb_ug RGB_BRD &rgb_ug RGB_BRI
-
-            // Thumbs
             &trans        &trans        &trans
             &trans        &trans        &trans
         >;
     };
-};
-```
-
 };
